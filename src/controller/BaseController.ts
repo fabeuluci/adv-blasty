@@ -31,7 +31,7 @@ export class BaseController extends Injectable {
     constructor() {
         super();
         const name = this.constructor.name.replace("Controller", "");
-        this.baseName = name[0].toLowerCase() + name.substr(1);
+        this.baseName = name[0].toLowerCase() + name.substring(1);
         this.viewDirectory = this.baseName;
     }
     
