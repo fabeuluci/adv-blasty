@@ -4,14 +4,14 @@ import { ISessionHolder } from "../service/ISessionHolder";
 import { Try } from "adv-try";
 import { IJsonRpcServer, JsonRpcResponse, JsonRpcError } from "adv-json-rpc-server";
 import { Inject } from "adv-ioc";
-import { IErrorFactory } from "../service/IErrorFactory";
+import { ErrorFactory } from "../service/ErrorFactory";
 
 export class JsonRpcExpressServer {
     
     @Inject private logger: ILogger;
     @Inject private sessionHolder: ISessionHolder;
     @Inject private jsonRpcServer: IJsonRpcServer;
-    @Inject private errorFactory: IErrorFactory;
+    @Inject private errorFactory: ErrorFactory;
     
     async processBodyToServerResponse(jRpc: unknown): Promise<ServerResponse> {
         const str = await this.processBodyToStr(jRpc);
@@ -96,7 +96,7 @@ export class JsonRpcExpressServer {
         const startTime = process.hrtime();
         this.logger.error(message || "Api rate limit exceeded");
         this.log("<unknown>", startTime, this.sessionHolder.getUserId() || "guest", false);
-        const response = this.jsonRpcServer.createJsonRpcError(null, this.errorFactory.createError({message: message}, "API_RATE_LIMIT_EXCEEDED"));
+        const response = this.jsonRpcServer.createJsonRpcError(null, this.errorFactory.create("API_RATE_LIMIT_EXCEEDED", message));
         return JSON.stringify(response);
     }
 }

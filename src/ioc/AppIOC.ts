@@ -13,6 +13,7 @@ import { ClientIpService } from "../service/ClientIpService";
 import { SessionRepository } from "../service/SessionRepository";
 import { PasswordService } from "../service/PasswordService";
 import { SingletonJobService } from "../service/SingletonJobService";
+import { ImageService } from "../service/ImageService";
 
 export class AppIOC extends IOC {
     
@@ -33,6 +34,7 @@ export class AppIOC extends IOC {
         this.register(SessionRepository);
         this.register(PasswordService);
         this.register(SingletonJobService);
+        this.register(ImageService);
         this.registerValue("lockManager", LockManager.create());
     }
 }

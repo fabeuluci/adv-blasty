@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "adv-ioc";
 import * as Validator from "adv-validator";
-import { IErrorFactory } from "../service/IErrorFactory";
+import { ErrorFactory } from "../service/ErrorFactory";
 
 export abstract class ApiValidator extends Injectable implements Validator.Types.PerNameValidator {
     
@@ -8,7 +8,7 @@ export abstract class ApiValidator extends Injectable implements Validator.Types
     protected builder: Validator.ValidatorBuilder;
     protected methods: {[key: string]: Validator.Types.Validator};
     
-    @Inject protected errorFactory: IErrorFactory;
+    @Inject protected errorFactory: ErrorFactory;
     
     constructor() {
         super();
@@ -31,7 +31,7 @@ export abstract class ApiValidator extends Injectable implements Validator.Types
         }
         catch (e) {
             const errorName = Validator.ValidatorException.getErrorNameFromException(e);
-            throw this.errorFactory.createError(e, errorName);
+            throw this.errorFactory.createFromError(errorName, e);
         }
     }
 }

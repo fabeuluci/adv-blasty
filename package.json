@@ -1,6 +1,6 @@
 {
   "name": "adv-blasty",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Simple express-based web-server framework",
   "license": "MIT",
   "author": {
@@ -36,6 +36,7 @@
     "express-session": "^1.17.3",
     "nodemailer": "^6.7.5",
     "real-client-ip": "^1.0.2",
+    "sharp": "^0.30.7",
     "ws": "^8.8.0"
   },
   "devDependencies": {
@@ -44,6 +45,7 @@
     "@types/express-fileupload": "^1.2.2",
     "@types/express-session": "^1.17.4",
     "@types/nodemailer": "^6.4.4",
+    "@types/sharp": "^0.30.4",
     "@types/ws": "^8.5.3"
   }
 }
